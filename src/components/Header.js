@@ -36,15 +36,17 @@ export default function Header() {
         size="4xl"
         noOfLines={1}
         mb="30"
-        bgGradient="linear(to-r, #FFB6B9, #FAE3D9, #BBDED6, #61C0BF)"
+        // bgGradient="linear(to-r, #FFB6B9, #FAE3D9, #BBDED6, #61C0BF)"
+        bgGradient="linear(to-r, primary.100, primary.200, primary.300, primary.400)"
         bgClip="text"
+        textstyles='h1'
       >
         Whiteboard App
       </Heading>
 
       {userData.isAuth ? (
         <HStack>
-          <Heading as="h3" size="lg" bg="#61C0BF" bgClip="text">
+          <Heading as="h3" size="lg" bg="#61C0BF" bgClip="text" variant={['base', 'sm', 'md']}>
             Welcome{" "}
             {userData.user.username.charAt(0).toUpperCase() +
               userData.user.username.slice(1)}

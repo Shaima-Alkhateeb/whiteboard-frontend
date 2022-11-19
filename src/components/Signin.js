@@ -14,7 +14,7 @@ export default function Signin() {
 
   return (
     <VStack p="3em" m="3em">
-      <Heading as="h2" size="xl">
+      <Heading variant={['base', 'sm', 'md']} as="h2" size="xl">
         Sign In
       </Heading>
 
