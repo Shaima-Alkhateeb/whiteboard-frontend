@@ -14,6 +14,8 @@ export const myTheme = extendTheme({
     //   300: "#FAE3D9",
     //   400: "#FFB6B9",
     // },
+
+    
   },
   textstyles: {
     h1: {
