@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 import { useAuth } from "./context/AuthContext";
 
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
 function App() {
   const { userData } = useAuth();

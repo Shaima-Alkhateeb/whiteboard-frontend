@@ -40,11 +40,11 @@ export default function Signin() {
             />
           </Form.Group>
 
-          {userData.isNotLogged && (
+          {/* {userData.isNotLogged && (
             <Alert key="strong" variant="danger">
               You Are Not Authorized
             </Alert>
-          )}
+          )} */}
           {/* <br></br> */}
           <Button variant="outline-success" type="submit">
             Sign In
