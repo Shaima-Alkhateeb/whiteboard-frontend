@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 import { useAuth } from "./context/AuthContext";
 
-// import { FaSun, FaMoon } from "react-icons/fa";
+import { useSelector } from 'react-redux'
 
 function App() {
   const { userData } = useAuth();

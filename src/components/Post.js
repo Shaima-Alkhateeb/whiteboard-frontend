@@ -23,6 +23,8 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 
+// const getAllPosts =getAllPosts()
+
 function Post() {
   const {
     deleteAlert,
@@ -41,6 +43,8 @@ function Post() {
   useEffect(() => {
     getAllPosts();
   }, []);
+
+  console.log('userName', userName)
 
   return (
     <VStack p="2em">
@@ -121,21 +125,19 @@ function Post() {
                               {/* <div> */}
                               {/* <Spacer /> */}
 
-                                {userData.user.role === "admin" ? (
-                                  <div>
-                                    {/* <Spacer /> */}
-                                    {/* Delete Comment */}
-                                    <IconButton
-                                      colorScheme="teal"
-                                      aria-label="Delete Comment"
-                                      icon={<MdDelete />}
-                                      onClick={() =>
-                                        handleCommentDelete(item.id)
-                                      }
-                                      alignSelf="flex-end"
-                                    />
-                                  </div>
-                                ) : null}
+                              {userData.user.role === "admin" ? (
+                                <div>
+                                  {/* <Spacer /> */}
+                                  {/* Delete Comment */}
+                                  <IconButton
+                                    colorScheme="teal"
+                                    aria-label="Delete Comment"
+                                    icon={<MdDelete />}
+                                    onClick={() => handleCommentDelete(item.id)}
+                                    alignSelf="flex-end"
+                                  />
+                                </div>
+                              ) : null}
                               {/* </div> */}
                             </Card.Body>
                           </Card>

@@ -2,14 +2,17 @@ import { createContext, useContext, useReducer } from "react";
 import base64 from "base-64";
 import { signUp, Signin, logout } from "../actions/authActions";
 import { dataState } from "../config/initials";
-import { authReducer } from "../reducers/authReducer";
+// import { authReducer } from "../reducers/authReducer";
+
+import authReducerRedux from '../reducers-redux/auth-redux'
 
 export const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 const AuthContextProvider = (props) => {
-  const [userData, dispatch] = useReducer(authReducer, dataState);
+  // const [userData, dispatch] = useReducer(authReducer, dataState);
+  const [userData, dispatch] = useReducer(authReducerRedux, dataState);
 
   const handleSignup = (e) => {
     e.preventDefault();

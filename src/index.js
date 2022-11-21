@@ -4,6 +4,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
+// redux
+
+// 1. import the configureStore
+import { configureStore } from "@reduxjs/toolkit";
+// 2. import the reducer
+import authReducerRedux from "./reducers-redux";
+// 4. import the Provider
+import { Provider } from "react-redux"; // will connects the store with app
+
 import AuthContextProvider from "./context/AuthContext";
 import PostContextProvider from "./context/PostContext";
 
@@ -12,24 +21,33 @@ import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 import { myTheme } from "./theme";
 
 const config = {
-  initialColorMode: 'light',
+  initialColorMode: "light",
   useSystemColorMode: false,
-}
+};
 
-const theme = extendTheme({ config })
+const theme = extendTheme({ config });
 
+// 3. create the store
+export const store = configureStore({
+  reducer: {
+    auth: authReducerRedux,
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={myTheme}>
-      <AuthContextProvider>
-        <PostContextProvider>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <App />
-        </PostContextProvider>
-      </AuthContextProvider>
-    </ChakraProvider>
+    {/* 5. add the Provider with store */}
+    <Provider store={store}>
+      <ChakraProvider theme={myTheme}>
+        <AuthContextProvider>
+          <PostContextProvider>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <App />
+          </PostContextProvider>
+        </AuthContextProvider>
+      </ChakraProvider>
+    </Provider>
   </React.StrictMode>
 );
 

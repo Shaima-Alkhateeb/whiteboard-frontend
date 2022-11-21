@@ -1,6 +1,9 @@
 import axios from "axios";
 import { actionType } from "../config/constant";
 
+// import { useDispatch, useSelector } from "react-redux";
+
+
 export const signUp = (dispatch, payload) => {
   try {
     if (payload.error) {
