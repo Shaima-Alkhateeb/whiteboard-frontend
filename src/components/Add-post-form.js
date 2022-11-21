@@ -19,14 +19,12 @@ function AddPostForm() {
 
   return (
     <VStack p="3em">
-      {/* <h2>Enter Your Post Items Here!</h2> */}
       <Heading as="h4" size="md">
         Enter Your Post Here
       </Heading>
       <Form onSubmit={handleSubmit} style={{ width: "50rem" }}>
         <Stack gap={3}>
           <Form.Group id="title">
-            {/* <Form.Label>Post Title</Form.Label> */}
             <Form.Control
               type="text"
               placeholder="Enter Title"
@@ -36,7 +34,6 @@ function AddPostForm() {
           </Form.Group>
 
           <Form.Group id="content">
-            {/* <Form.Label>Post content</Form.Label> */}
             <Form.Control
               type="text"
               as="textarea"

@@ -111,22 +111,19 @@ function Post() {
                             }}
                           >
                             <Card.Body style={{ width: "18rem" }}>
-                              {/* <Card.Title>
-                                {item.creator.charAt(0).toUpperCase() +
-                                  item.creator.slice(1)}
-                              </Card.Title> */}
                               <Card.Text>
                                 {item.creator.charAt(0).toUpperCase() +
                                   item.creator.slice(1)}{" "}
                                 : {item.comment}
                               </Card.Text>
-                              {/* <Card.Text>{item.comment}</Card.Text> */}
                               <br></br>
                               {/* <Spacer /> */}
-                              <div>
+                              {/* <div> */}
+                              {/* <Spacer /> */}
+
                                 {userData.user.role === "admin" ? (
                                   <div>
-                                    <Spacer />
+                                    {/* <Spacer /> */}
                                     {/* Delete Comment */}
                                     <IconButton
                                       colorScheme="teal"
@@ -139,7 +136,7 @@ function Post() {
                                     />
                                   </div>
                                 ) : null}
-                              </div>
+                              {/* </div> */}
                             </Card.Body>
                           </Card>
                           <br></br>

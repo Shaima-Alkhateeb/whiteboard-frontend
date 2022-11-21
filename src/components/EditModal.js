@@ -54,14 +54,14 @@ function EditModal(props) {
         fontSize="25px"
       />
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} style={{color:'#61C0BF'}}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Post</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form onSubmit={(e) => handleEdit(e, props.post.id)}>
-            <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Group>
               <Form.Label>Post Title: </Form.Label>
               <Form.Control
                 type="text"
@@ -73,7 +73,7 @@ function EditModal(props) {
             </Form.Group>
             <br></br>
 
-            <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Group>
               <Form.Label>Post Content: </Form.Label>
               <Form.Control
                 as="textarea"
@@ -85,10 +85,19 @@ function EditModal(props) {
             </Form.Group>
 
             <Modal.Footer>
-              <Button variant="secondary" type="submit">
+              {/* <IconButton
+                colorScheme="teal"
+                aria-label="Edit Post"
+                icon={<MdEdit />}
+                onClick={handleShow}
+                alignSelf="flex-end"
+                fontSize="25px"
+              /> */}
+
+              <Button variant="outline-success" type="submit">
                 Save Changes
               </Button>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="outline-secondary" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>
