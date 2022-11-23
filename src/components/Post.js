@@ -13,6 +13,8 @@ import { MdDelete } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 // import { MdEdit } from "react-icons/md";
 
+import '../index.css';
+
 import {
   IconButton,
   // useColorMode,
@@ -114,20 +116,16 @@ function Post() {
                               width: "40em",
                             }}
                           >
-                            <Card.Body style={{ width: "18rem" }}>
+                            <Card.Body style={{ width: "18rem"}}>
                               <Card.Text>
                                 {item.creator.charAt(0).toUpperCase() +
                                   item.creator.slice(1)}{" "}
                                 : {item.comment}
                               </Card.Text>
                               <br></br>
-                              {/* <Spacer /> */}
-                              {/* <div> */}
-                              {/* <Spacer /> */}
 
                               {userData.user.role === "admin" ? (
                                 <div>
-                                  {/* <Spacer /> */}
                                   {/* Delete Comment */}
                                   <IconButton
                                     colorScheme="teal"
@@ -138,7 +136,6 @@ function Post() {
                                   />
                                 </div>
                               ) : null}
-                              {/* </div> */}
                             </Card.Body>
                           </Card>
                           <br></br>

@@ -7,11 +7,13 @@ import "./index.css";
 // redux
 
 // 1. import the configureStore
-import { configureStore } from "@reduxjs/toolkit";
+// import { configureStore } from "@reduxjs/toolkit";
 // 2. import the reducer
-import authReducerRedux from "./reducers-redux";
+// import authReducerRedux from "./reducers-redux/auth-redux";
+// import authReducer from "./reducers/authReducer";
 // 4. import the Provider
 import { Provider } from "react-redux"; // will connects the store with app
+import { store } from "./store";
 
 import AuthContextProvider from "./context/AuthContext";
 import PostContextProvider from "./context/PostContext";
@@ -28,26 +30,26 @@ const config = {
 const theme = extendTheme({ config });
 
 // 3. create the store
-export const store = configureStore({
-  reducer: {
-    auth: authReducerRedux,
-  },
-});
+// export const store = configureStore({
+//   reducer: {
+//     auth: authReducerRedux
+//   },
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* 5. add the Provider with store */}
-    <Provider store={store}>
-      <ChakraProvider theme={myTheme}>
+    <ChakraProvider theme={myTheme}>
+      {/* 5. add the Provider with store */}
+      <Provider store={store}>
         <AuthContextProvider>
           <PostContextProvider>
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <App />
           </PostContextProvider>
         </AuthContextProvider>
-      </ChakraProvider>
-    </Provider>
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
