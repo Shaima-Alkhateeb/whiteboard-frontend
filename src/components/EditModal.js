@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
+import { useSelector } from "react-redux";
 
 import { MdEdit } from "react-icons/md";
 
@@ -14,7 +15,8 @@ import {
 } from "@chakra-ui/react";
 
 function EditModal(props) {
-  const { userData } = useAuth();
+  // const { userData } = useAuth();
+  const { user } = useSelector(state => state.auth);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -25,8 +27,8 @@ function EditModal(props) {
     const updatedPost = {
       postTitle: e.target.editTitle.value,
       postContent: e.target.editContent.value,
-      userID: userData.user.userId,
-      creator: userData.user.username,
+      userID: user.userId,
+      creator: user.username,
     };
 
     await axios.put(
@@ -34,7 +36,7 @@ function EditModal(props) {
       updatedPost,
       {
         headers: {
-          Authorization: `Bearer ${userData.user.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       }
     );

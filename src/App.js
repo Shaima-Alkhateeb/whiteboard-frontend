@@ -7,12 +7,13 @@ import Signin from "./components/Signin";
 import Post from "./components/Post";
 import Footer from "./components/Footer";
 
-import { useAuth } from "./context/AuthContext";
+// import { useAuth } from "./context/AuthContext";
 
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const { userData } = useAuth();
+  // const { userData } = useAuth();
+  const { isAuth } = useSelector((state) => state.auth);
 
   return (
     <div className="App">
@@ -22,22 +23,22 @@ function App() {
           <Route
             exact
             path="/"
-            element={userData.isAuth ? <Post /> : <Signin />}
+            element={isAuth ? <Post /> : <Signin />}
           ></Route>
           <Route
             exact
             path="/signin"
-            element={userData.isAuth ? <Post /> : <Signin />}
+            element={isAuth ? <Post /> : <Signin />}
           ></Route>
           <Route
             exact
             path="/signup"
-            element={userData.isAuth ? <Post /> : <Signup />}
+            element={isAuth ? <Post /> : <Signup />}
           ></Route>
           <Route
             exact
             path="/post"
-            element={userData.isAuth ? <Post /> : <Signin />}
+            element={isAuth ? <Post /> : <Signin />}
           ></Route>
         </Routes>
         <Footer />

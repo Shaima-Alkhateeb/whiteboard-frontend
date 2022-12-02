@@ -3,8 +3,8 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import { useAuth } from "../context/AuthContext";
-
+// import { useAuth } from "../context/AuthContext";
+import { useSelector } from 'react-redux'
 // import { FiSend } from "react-icons/fi";
 
 import {
@@ -16,11 +16,12 @@ import {
 } from "@chakra-ui/react";
 
 function AddCommentForm(props) {
-  const { userData } = useAuth();
+  // const { userData } = useAuth();
+  const { user } = useSelector(state => state.auth)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userID = userData.user.userId;
+    const userID = user.userId;
     const newComment = {
       comment: e.target.comment.value,
     };
