@@ -5,6 +5,8 @@ const initialState = {
     comments: [],
     loading: false,
     error: null,
+    addAlert: false,
+    deleteAlert: false,
 };
 
 export const postSlice = createSlice({
@@ -16,25 +18,57 @@ export const postSlice = createSlice({
             state.loading = true;
         },
         postSuccess: (state, action) => {
-            state.loading = false;
+            // state.loading = false;
             state.post = action.payload;
         },
         postFailure: (state, action) => {
-            state.loading = false;
+            // state.loading = false;
+            state.error = action.payload;
+        },
+        requestAddPost(state) {
+            state.loading = true;
+        },
+        addPostSuccess(state, action) {
+            // state.loading = false;
+            state.post = [...state.post, action.payload];
+        },
+        addPostFailure(state, action) {
+            // state.loading = false;
+            state.error = action.payload;
+        },
+        requestDeletePost(state) {
+            state.loading = true;
+        },
+        deletePostSuccess(state, action) {
+            // state.loading = false;
+            state.post = state.post.filter((post) => post.id !== action.payload);
+        },
+        deletePostFailure(state, action) {
+            // state.loading = false;
             state.error = action.payload;
         },
 
         // FOR COMMENTS
-        requestComments: (state) => {
+        requestDeleteComments (state) {
             state.loading = true;
         },
-        commentsSuccess: (state, action) => {
+        commentsDeleteSuccess(state, action) {
             state.loading = false;
             state.comments = action.payload;
         },
-        commentsFailure: (state, action) => {
+        commentsDeleteFailure (state, action) {
             state.loading = false;
             state.error = action.payload;
+        },
+
+        // FOR ALERT
+        requestAlert (state) {
+            // state.loading = true;
+            state.addAlert = true;
+        },
+        deleteAlert (state) {
+            // state.loading = false;
+            state.deleteAlert = true;
         },
     },
 });
@@ -43,9 +77,17 @@ export const {
     requestPost,
     postSuccess,
     postFailure,
-    requestComments,
-    commentsSuccess,
-    commentsFailure,
+    requestAddPost,
+    addPostSuccess,
+    addPostFailure,
+    requestDeletePost,
+    deletePostSuccess,
+    deletePostFailure,
+    requestDeleteComments,
+    commentsDeleteSuccess,
+    commentsDeleteFailure,
+    requestAlert,
+    deleteAlert,
 } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -15,8 +15,8 @@ import "./index.css";
 import { Provider } from "react-redux"; // will connects the store with app
 import { store } from "./store";
 
-import AuthContextProvider from "./context/AuthContext";
-import PostContextProvider from "./context/PostContext";
+// import AuthContextProvider from "./context/AuthContext";
+// import PostContextProvider from "./context/PostContext";
 
 import { ChakraProvider, extendTheme, ColorModeScript } from "@chakra-ui/react";
 
@@ -42,12 +42,12 @@ root.render(
     <ChakraProvider theme={myTheme}>
       {/* 5. add the Provider with store */}
       <Provider store={store}>
-        <AuthContextProvider>
-          <PostContextProvider>
+        {/* <AuthContextProvider>
+          <PostContextProvider> */}
             <ColorModeScript initialColorMode={theme.config.initialColorMode} />
             <App />
-          </PostContextProvider>
-        </AuthContextProvider>
+          {/* </PostContextProvider>
+        </AuthContextProvider> */}
       </Provider>
     </ChakraProvider>
   </React.StrictMode>

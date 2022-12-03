@@ -4,13 +4,17 @@ import Form from "react-bootstrap/Form";
 import { Stack } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { signUp } from "../actions/authActions";
 
 import { VStack, Heading } from "@chakra-ui/react";
 // import { useToast } from "@chakra-ui/react";
 
 export default function Signup() {
-  const { userData, handleSignup } = useAuth();
+  // const { userData, handleSignup } = useAuth();
+  const error = useSelector(state => state.auth.error);
+  const dispatch = useDispatch();
 
   return (
     <VStack p="3em">
@@ -18,7 +22,7 @@ export default function Signup() {
         Sign Up
       </Heading>
 
-      <Form onSubmit={handleSignup} style={{ width: "40em" }}>
+      <Form onSubmit={(e) => signUp( dispatch, e)} style={{ width: "40em" }}>
         <Stack gap={4}>
           <Form.Group id="title">
             <Form.Label>Username</Form.Label>
@@ -72,11 +76,16 @@ export default function Signup() {
             </Form.Select>
           </Form.Group>
 
-          {userData.isPassword && (
+          {/* {userData.isPassword && (
             <Alert key="strong" variant="danger">
               The password does not match, Try again.
             </Alert>
-          )}
+          )} */}
+          {error && 
+            <Alert key="strong" variant="danger">
+              {error}
+            </Alert>
+          }
 
           <Button variant="outline-success" type="submit">
             Sign Up

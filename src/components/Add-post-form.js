@@ -2,9 +2,11 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Stack } from "react-bootstrap";
-import Alert from "react-bootstrap/Alert";
+// import Alert from "react-bootstrap/Alert";
 
-import { usePost } from "../context/PostContext";
+// import { usePost } from "../context/PostContext";
+import { useDispatch } from "react-redux";
+import { handleAddPost } from "../actions/postAction";
 
 import {
   // IconButton,
@@ -15,14 +17,17 @@ import {
 } from "@chakra-ui/react";
 
 function AddPostForm() {
-  const { addAlert, setAddAlert, handleSubmit } = usePost();
+  // const { addAlert, setAddAlert, handleSubmit } = usePost();
+  const dispatch = useDispatch();
 
   return (
     <VStack p="3em">
       <Heading as="h4" size="md">
         Enter Your Post Here
       </Heading>
-      <Form onSubmit={handleSubmit} style={{ width: "50rem" }}>
+      {/* <Form onSubmit={handleSubmit} style={{ width: "50rem" }}> */}
+      <Form onSubmit={(e) => handleAddPost(e, dispatch)} style={{ width: "50rem" }}>
+
         <Stack gap={3}>
           <Form.Group id="title">
             <Form.Control
@@ -44,7 +49,7 @@ function AddPostForm() {
             />
           </Form.Group>
 
-          {addAlert && (
+          {/* {addAlert && (
             <Alert
               key="strong"
               variant="success"
@@ -53,7 +58,7 @@ function AddPostForm() {
             >
               Post has been Added successfully!
             </Alert>
-          )}
+          )} */}
 
           <Button
             variant="outline-dark"

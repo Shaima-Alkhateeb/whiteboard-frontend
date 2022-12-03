@@ -4,13 +4,17 @@ import Form from "react-bootstrap/Form";
 import { Stack } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from "../actions/authActions";
 
 import { VStack, Heading } from "@chakra-ui/react";
 // import { useToast } from "@chakra-ui/react";
 
 export default function Signin() {
-  const { userData, handleSignin } = useAuth();
+  // const { userData, handleSignin } = useAuth();
+  const dispatch = useDispatch();
+  const error = useSelector(state => state.auth.error);
 
   return (
     <VStack p="3em" m="3em">
@@ -18,7 +22,7 @@ export default function Signin() {
         Sign In
       </Heading>
 
-      <Form onSubmit={handleSignin}>
+      <Form onSubmit={(e) => login( dispatch, e)}>
         <Stack gap={5}>
           <Form.Group id="title">
             <Form.Label>Username</Form.Label>
@@ -45,6 +49,11 @@ export default function Signin() {
               You Are Not Authorized
             </Alert>
           )} */}
+          {error && (
+            <Alert key="strong" variant="danger">
+              {error}
+            </Alert>
+          )}
           {/* <br></br> */}
           <Button variant="outline-success" type="submit">
             Sign In

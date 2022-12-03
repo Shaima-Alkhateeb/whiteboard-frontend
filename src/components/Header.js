@@ -1,7 +1,9 @@
 import React from "react";
 // import Button from "react-bootstrap/Button";
 
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../actions/authActions'
 
 import { FaSun, FaMoon } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
@@ -17,7 +19,10 @@ import {
 // import FontAwesomeIcon from ''
 
 export default function Header() {
-  const { userData, handleLogout } = useAuth();
+  // const { userData, handleLogout } = useAuth();
+  const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const user = useSelector(state => state.auth.user);
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -44,19 +49,19 @@ export default function Header() {
         Whiteboard App
       </Heading>
 
-      {userData.isAuth ? (
+      {isAuth ? (
         <HStack>
           <Heading as="h3" size="lg" bg="#61C0BF" bgClip="text" variant={['base', 'sm', 'md']}>
             Welcome{" "}
-            {userData.user.username.charAt(0).toUpperCase() +
-              userData.user.username.slice(1)}
+            {user.username.charAt(0).toUpperCase() +
+              user.username.slice(1)}
             {/* Logout */}
             <IconButton
               m="3"
               colorScheme="teal"
               aria-label="Send email"
               icon={<FiLogOut />}
-              onClick={handleLogout}
+              onClick={() => logout(dispatch)}
               alignSelf="flex-end"
             />
           </Heading>
@@ -71,7 +76,7 @@ export default function Header() {
 
           {/* <Button
             variant="outline-success"
-            onClick={handleLogout}
+            onClick={() => logout(dispatch)}
             style={{ marginLeft: "107em" }}
           >
             Logout */}

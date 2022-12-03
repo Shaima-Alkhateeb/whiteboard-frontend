@@ -3,11 +3,14 @@ import AddPostForm from "./Add-post-form";
 import AddCommentForm from "./Add-comment-form";
 // import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Alert from "react-bootstrap/Alert";
+// import Alert from "react-bootstrap/Alert";
 import EditModal from "./EditModal";
 
-import { usePost } from "../context/PostContext";
-import { useAuth } from "../context/AuthContext";
+// import { usePost } from "../context/PostContext";
+// import { useAuth } from "../context/AuthContext";
+import { useDispatch, useSelector } from "react-redux"; 
+import { getAllPosts, handlePostDelete, handleCommentDelete } from "../actions/postAction";
+
 
 import { MdDelete } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
@@ -28,38 +31,42 @@ import {
 // const getAllPosts =getAllPosts()
 
 function Post() {
-  const {
-    deleteAlert,
-    setDeleteAlert,
-    posts,
-    getAllPosts,
-    handlePostDelete,
-    handleCommentDelete,
-  } = usePost();
-  const { userData } = useAuth();
+  // const {
+  //   deleteAlert,
+  //   setDeleteAlert,
+  //   posts,
+  //   getAllPosts,
+  //   handlePostDelete,
+  //   handleCommentDelete,
+  // } = usePost();
+  // const { userData } = useAuth();
+  const dispatch = useDispatch();
+
+  const posts = useSelector(state => state.post.posts);
+  const { user } = useSelector(state => state.auth);
 
   const userName =
-    userData.user.username.charAt(0).toUpperCase() +
-    userData.user.username.slice(1);
+    user.username.charAt(0).toUpperCase() +
+    user.username.slice(1);
 
   useEffect(() => {
-    getAllPosts();
-  }, []);
+    getAllPosts(dispatch);
+  }, [posts]);
 
   console.log('userName', userName)
 
   return (
     <VStack p="2em">
-      {deleteAlert && (
-        <Alert
+      {/* {deleteAlert && ( */}
+        {/* <Alert
           key="strong"
           variant="success"
-          onClose={() => setDeleteAlert(false)}
+          onClose={() => handlePostDelete(value.id, dispatch)}
           dismissible
         >
           Post has been deleted successfully
-        </Alert>
-      )}
+        </Alert> */}
+      {/* )} */}
       <AddPostForm />
       <div>
         {posts &&
@@ -74,18 +81,18 @@ function Post() {
                   }}
                 >
                   <Card.Body>
-                    {userData.user.role === "admin" ||
-                    userData.user.userId === value.userID ? (
+                    {user.role === "admin" ||
+                    user.userId === value.userID ? (
                       <HStack p="1em">
                         <Spacer />
                         {/* Edit Post         */}
-                        <EditModal post={value} getAllPosts={getAllPosts} />
+                        <EditModal post={value} />
                         {/* Delete Post */}
                         <IconButton
                           colorScheme="teal"
                           aria-label="Delete Post"
                           icon={<TiDelete />}
-                          onClick={() => handlePostDelete(value.id)}
+                          onClick={() => handlePostDelete(value.id, dispatch)}
                           alignSelf="flex-end"
                           // borderRadius='50%'
                           fontSize="30px"
@@ -101,7 +108,7 @@ function Post() {
                     <Card.Text>{value.postContent}</Card.Text>
                   </Card.Body>
 
-                  <AddCommentForm postID={value.id} getAllPosts={getAllPosts} />
+                  <AddCommentForm postID={value.id}  />
 
                   {value.Comments &&
                     value.Comments.map((item, idx) => {
@@ -124,14 +131,14 @@ function Post() {
                               </Card.Text>
                               <br></br>
 
-                              {userData.user.role === "admin" ? (
+                              {user.role === "admin" ? (
                                 <div>
                                   {/* Delete Comment */}
                                   <IconButton
                                     colorScheme="teal"
                                     aria-label="Delete Comment"
                                     icon={<MdDelete />}
-                                    onClick={() => handleCommentDelete(item.id)}
+                                    onClick={() => handleCommentDelete(item.id, dispatch)}
                                     alignSelf="flex-end"
                                   />
                                 </div>
